@@ -177,13 +177,6 @@
                                                  <button type="button" class="btn "><i class="fa fa-reply"></i></button>
                                              </a>
                                              <?php } ?>
-
-                                             <!-- <a
-                                                 href="<?php echo base_url('index.php/Kegiatan/acc/2/'.$pengguna->id_kegiatan) ?>">
-                                             </a> -->
-                                             <!-- <a
-                                                 href="<?php echo base_url('index.php/Kegiatan/acc/1/'.$pengguna->id_kegiatan) ?>">
-                                             </a> -->
                                          </div>
                                          <!-- /.box-footer -->
                                  </form>

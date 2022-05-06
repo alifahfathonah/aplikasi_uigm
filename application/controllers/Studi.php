@@ -165,9 +165,14 @@ class Studi extends CI_Controller {
 
 	public function acc($status= null, $id_studi=null){
 		
-		$this->data_user['status_studi']=$status;
+		$alasan = $this->input->post('alasan');
 
-		$result=$this->Studi_model->edit($id_studi,$this->data_user);
+		$data = array(
+			'status_studi' => $status,
+			'alasan' => $alasan
+		);
+
+		$result=$this->Studi_model->edit($id_studi,$data);
 
 		 if($result != null)
 			{

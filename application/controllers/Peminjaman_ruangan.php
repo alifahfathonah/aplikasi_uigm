@@ -177,9 +177,14 @@ class Peminjaman_ruangan extends CI_Controller {
 
 	public function acc($status= null, $id_peminjaman_ruangan=null){
 		
-		$this->data_user['status_peminjaman']=$status;
+		$alasan = $this->input->post('alasan');
 
-		$result=$this->Peminjaman_model->edit($id_peminjaman_ruangan,$this->data_user);
+		$data = array(
+			'status_peminjaman' => $status,
+			'alasan' => $alasan
+		);
+
+		$result=$this->Peminjaman_model->edit($id_peminjaman_ruangan,$data);
 
 		 if($result != null)
 			{
