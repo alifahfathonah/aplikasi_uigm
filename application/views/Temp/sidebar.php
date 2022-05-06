@@ -21,7 +21,7 @@
                             </li>
                 <?php endif; endif;?> 
 
-             <?php if($this->session->userdata('unit_pegawai') == "Admin" || $this->session->userdata('unit_pegawai') == "Dekan"):?>
+             <?php if($this->session->userdata('unit_pegawai') == "Admin" || $this->session->userdata('unit_pegawai') == "Dekan" || $this->session->userdata('unit_pegawai') == "Kaprodi"):?>
                 <?php if($judulhalaman == "Dashboard"):?>
                     <li class="submenu">
                         <a class="active" href="<?php echo base_url('index.php/Dashboard') ?>"><i class="fa fa-fw fa-dashboard"></i><span> Dashboard </span> </a>
@@ -99,7 +99,7 @@
                 <?php endif;endif;?> ...
 
 
-                <?php if($this->session->userdata('unit_pegawai') == "Dekan" || $this->session->userdata('unit_pegawai') == "Admin" ):?>
+                <?php if($this->session->userdata('unit_pegawai') == "Dekan" || $this->session->userdata('unit_pegawai') == "Admin" || $this->session->userdata('unit_pegawai') == "Kaprodi"):?>
                     <?php if($judulhalaman == "Kegiatan"):?>
                         <li class="submenu">
                             <a class="active" href="<?php echo base_url('index.php/kegiatan/approve') ?>"><i class="fa fa-fw fa-handshake-o"></i><span> Data Kegiatan </span> </a>
@@ -110,7 +110,7 @@
                         </li>
                 <?php endif;endif;?> 
 
-                <?php if($this->session->userdata('unit_pegawai') == "Dekan" || $this->session->userdata('unit_pegawai') == "Admin" ):?>
+                <?php if($this->session->userdata('unit_pegawai') == "Dekan" || $this->session->userdata('unit_pegawai') == "Admin" || $this->session->userdata('unit_pegawai') == "Kaprodi"):?>
                     <?php if($judulhalaman == "Studi"):?>
                         <li class="submenu">
                             <a class="active" href="<?php echo base_url('index.php/Studi/approve') ?>"><i class="fa fa-fw fa-id-badge"></i><span> Data Studi Lanjut </span> </a>
@@ -121,7 +121,7 @@
                         </li>
                 <?php endif;endif;?> 
 
-                <?php if($this->session->userdata('unit_pegawai') == "Dekan" || $this->session->userdata('unit_pegawai') == "Admin" ):?>
+                <?php if($this->session->userdata('unit_pegawai') == "Dekan" || $this->session->userdata('unit_pegawai') == "Admin" || $this->session->userdata('unit_pegawai') == "Kaprodi"):?>
                     <?php if($judulhalaman == "Peminjaman"):?>
                         <li class="submenu">
                             <a class="active" href="<?php echo base_url('index.php/Peminjaman_ruangan/approve') ?>"><i class="fa fa-fw fa-map-marker"></i><span> Data Peminjaman </span> </a>

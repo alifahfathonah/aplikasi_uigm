@@ -57,8 +57,37 @@ class Login extends CI_Controller {
 				$this->session->set_flashdata('login','login tidak berhasil <br> username dan password salah');
 				redirect('login');
 			} 	
-		 }
-		 else{
+		 }else if($jabatan == 3){
+			
+				$cek=$this->Pegawai_model->cek_login($nip, md5($password));
+	
+				if($cek!= null)
+				{			
+					$unit_pegawai = $cek->jabatan;
+					$password = $cek->password;	
+					$nip = $cek->nip;
+					$nama = $cek->nama_pegawai;
+					$id = $cek->id_pegawai;
+					
+					$this->session->set_userdata(array(
+						'Login' => true,
+						'nama' => $nama,
+						'id' => $id,
+						'nip' => $nip,
+						'unit_pegawai' => $unit_pegawai,
+						'jabatan' => $unit_pegawai,
+						'password'=> $password));						
+					
+					  redirect('Dashboard');
+				}
+				else
+				{
+					$this->session->set_flashdata('login','login tidak berhasil <br> username dan password salah');
+					redirect('login');
+				} 
+		 
+		}
+		 else if($jabatan == 2){
 			$cek=$this->Akademik_model->cek_login($nip, md5($password));
 
 			if($cek!= null)

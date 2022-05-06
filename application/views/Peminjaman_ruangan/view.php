@@ -172,11 +172,11 @@
 
                                          <!-- /.box-body -->
                                          <div class="box-footer">
-                                             <?php if ($this->session->userdata('unit_pegawai') == "Dekan" || $this->session->userdata('unit_pegawai') == "Admin" ) { ?>
+                                             <?php if ($this->session->userdata('unit_pegawai') == "Dekan" || $this->session->userdata('unit_pegawai') == "Admin" || $this->session->userdata('unit_pegawai') == "Kaprodi" ) { ?>
                                              <a href="<?php echo base_url('index.php/Peminjaman_ruangan/approve') ?>">
                                                  <button type="button" class="btn "><i class="fa fa-reply"></i></button>
                                              </a>
-                                             <?php  if ($pengguna->status_peminjaman == 0 && $this->session->userdata('unit_pegawai') == "Dekan" ) { ?>
+                                             <?php  if ($pengguna->status_peminjaman == 0 && $this->session->userdata('unit_pegawai') == "Dekan"  ) { ?>
 
                                              <button type="button" class="btn btn-success  pull-right"
                                                  data-toggle="modal" data-target=".terima">TERIMA <br><i
