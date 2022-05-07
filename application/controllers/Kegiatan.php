@@ -38,8 +38,15 @@ class Kegiatan extends CI_Controller {
 	public function approve()
 	{	
 		 $judulhalaman = "Kegiatan";
+		 if($this->session->userdata('unit_pegawai') == 'Admin'){
+			$id_status_progres_pengajuan = 3;
+		 }else if($this->session->userdata('unit_pegawai') == 'Dekan'){
+			$id_status_progres_pengajuan = 2;
+		 }else if($this->session->userdata('unit_pegawai') == 'Kaprodi'){
+			$id_status_progres_pengajuan = 1;
+		 }
 		$this->data['judulhalaman'] = $judulhalaman;
-		$this->data['pengguna']=$this->Kegiatan_model->get_all();
+		$this->data['pengguna']=$this->Kegiatan_model->get_all_by_status_progres($id_status_progres_pengajuan);
 
 		$this->load->view('Temp/header');
 		$this->load->view('Temp/sidebar',$this->data);			
@@ -59,6 +66,7 @@ class Kegiatan extends CI_Controller {
 		$this->data_user['jumlah_hadir']=$this->input->post('jumlah_hadir');
 		$this->data_user['penanggung_jawab']=$this->input->post('penanggung_jawab');
 		$this->data_user['nama_kegiatan']=$this->input->post('nama_kegiatan');
+		$this->data_user['status_progres_pengajuan']=1;
 		$tanggal_m=$this->input->post('tanggal_mulai');
 		$this->data_user['tanggal_mulai'] = date("Y-m-d", strtotime($tanggal_m)) ;
 		$tanggal_s=$this->input->post('tanggal_mulai');
@@ -173,7 +181,7 @@ class Kegiatan extends CI_Controller {
 		redirect('Kegiatan');
 	}
 
-	public function acc($status= null, $id_Kegiatan=null){
+	public function acc($status= null, $id_Kegiatan=null, $status_progres_pengajuan = null){
 		$alasan = $this->input->post('alasan');
 		// $this->data_user['status_Kegiatan']=$status;
 		// echo var_dump($alasan);
@@ -181,6 +189,7 @@ class Kegiatan extends CI_Controller {
 
 		$data = array(
 			'status_kegiatan' => $status,
+			'status_progres_pengajuan' => $status_progres_pengajuan,
 			'alasan' => $alasan
 		);
 

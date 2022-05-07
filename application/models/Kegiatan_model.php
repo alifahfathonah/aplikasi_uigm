@@ -34,14 +34,16 @@ class Kegiatan_model extends CI_Model
         return $query->result();
     }
 
-    function get_all()
+    function get_all_by_status_progres($id_status_progres_pengajuan)
     {
         $this->db->join('akademik','akademik.id_akademik=kegiatan.id_akademik');
         $this->db->join('prodi','prodi.id_prodi=akademik.id_prodi');
+        $this->db->where('status_progres_pengajuan', $id_status_progres_pengajuan);
         $this->db->order_by($this->primary_key);
         $query = $this->db->get($this->table_name);
         return $query->result();
     }
+
   
 
     function count_all()
