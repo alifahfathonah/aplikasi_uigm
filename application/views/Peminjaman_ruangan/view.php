@@ -170,37 +170,77 @@
                                              </div>
                                          </div>
 
-                                         <!-- /.box-body -->
+                                         <a href="<?php echo base_url('index.php/Peminjaman_ruangan') ?>">
+                                             <button type="button" class="btn "><i class="fa fa-reply"></i></button>
+                                         </a>
+
                                          <div class="box-footer">
-                                             <?php if ($this->session->userdata('unit_pegawai') == "Dekan" || $this->session->userdata('unit_pegawai') == "Admin" || $this->session->userdata('unit_pegawai') == "Kaprodi" ) { ?>
-                                             <a href="<?php echo base_url('index.php/Peminjaman_ruangan/approve') ?>">
-                                                 <button type="button" class="btn "><i class="fa fa-reply"></i></button>
-                                             </a>
-                                             <?php  if ($pengguna->status_peminjaman == 0 && $this->session->userdata('unit_pegawai') == "Dekan"  ) { ?>
+                                             <?php if ( $this->session->userdata('unit_pegawai') == "Kaprodi" ) { ?>
+
+                                             <?php  if ($pengguna->status_peminjaman == 0 && $this->session->userdata('unit_pegawai') == "Kaprodi"  ) { ?>
 
                                              <button type="button" class="btn btn-success  pull-right"
-                                                 data-toggle="modal" data-target=".terima">TERIMA <br><i
+                                                 data-toggle="modal" data-target=".terima_kaprodi">TERIMA <br><i
                                                      class="fa fa-check"></i></button>
 
 
                                              <button type="button" class="btn btn-danger  pull-right"
-                                                 data-toggle="modal" data-target=".tolak">TOLAK <br><i
+                                                 data-toggle="modal" data-target=".tolak_kaprodi">TOLAK <br><i
                                                      class="fa fa-remove"></i></button>
                                              <?php }
               }  else { ?>
-                                             <a href="<?php echo base_url('index.php/Peminjaman_ruangan') ?>">
-                                                 <button type="button" class="btn "><i class="fa fa-reply"></i></button>
-                                             </a>
+
+                                             <?php } ?>
+                                         </div>
+                                         <!-- /.box-footer -->
+
+                                         <div class="box-footer">
+                                             <?php if ($this->session->userdata('unit_pegawai') == "Admin" ) { ?>
+
+                                             <?php  if ($this->session->userdata('unit_pegawai') == "Admin"  ) { ?>
+
+                                             <button type="button" class="btn btn-success  pull-right"
+                                                 data-toggle="modal" data-target=".terima_admin">TERIMA <br><i
+                                                     class="fa fa-check"></i></button>
+
+
+                                             <button type="button" class="btn btn-danger  pull-right"
+                                                 data-toggle="modal" data-target=".tolak_admin">TOLAK <br><i
+                                                     class="fa fa-remove"></i></button>
+                                             <?php }
+              }  else { ?>
+
+                                             <?php } ?>
+                                         </div>
+                                         <!-- /.box-footer -->
+
+                                         <div class="box-footer">
+                                             <?php if ($this->session->userdata('unit_pegawai') == "Dekan"  ) { ?>
+
+                                             <?php  if ($this->session->userdata('unit_pegawai') == "Dekan"  ) { ?>
+
+                                             <button type="button" class="btn btn-success  pull-right"
+                                                 data-toggle="modal" data-target=".terima_dekan">TERIMA <br><i
+                                                     class="fa fa-check"></i></button>
+
+
+                                             <button type="button" class="btn btn-danger  pull-right"
+                                                 data-toggle="modal" data-target=".tolak_dekan">TOLAK <br><i
+                                                     class="fa fa-remove"></i></button>
+                                             <?php }
+              }  else { ?>
+
                                              <?php } ?>
                                          </div>
                                          <!-- /.box-footer -->
                                  </form>
-                                 <div class="tolak modal fade" tabindex="-1" role="dialog"
+
+                                 <div class="tolak_kaprodi modal fade" tabindex="-1" role="dialog"
                                      aria-labelledby="myModalLabel">
                                      <div class="modal-dialog" role="document">
                                          <div class="modal-content">
                                              <div class="modal-header">
-                                                 <h4 class="modal-title" id="myModalLabel">Alasan Ditolak
+                                                 <h4 class="modal-title" id="myModalLabel">Alasan Ditolak Kaprodi
                                                  </h4>
                                                  <button type="button" class="close" data-dismiss="modal"
                                                      aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -208,7 +248,7 @@
                                              </div>
                                              <div class="modal-body">
                                                  <form
-                                                     action="<?php echo base_url('index.php/Peminjaman_ruangan/acc/2/'.$pengguna->id_peminjaman_ruangan) ?>/"
+                                                     action="<?php echo base_url('index.php/Peminjaman_ruangan/acc/2/'.$pengguna->id_peminjaman_ruangan.'/1') ?>/"
                                                      method="POST">
                                                      <div class="form-group">
                                                          <label for="exampleInputEmail1">alasan</label>
@@ -223,12 +263,12 @@
                                      </div>
                                  </div>
 
-                                 <div class="terima modal fade" tabindex="-1" role="dialog"
+                                 <div class="terima_kaprodi modal fade" tabindex="-1" role="dialog"
                                      aria-labelledby="myModalLabel">
                                      <div class="modal-dialog" role="document">
                                          <div class="modal-content">
                                              <div class="modal-header">
-                                                 <h4 class="modal-title" id="myModalLabel">Alasan Diterima
+                                                 <h4 class="modal-title" id="myModalLabel">Alasan Diterima Kaprodi
                                                  </h4>
                                                  <button type="button" class="close" data-dismiss="modal"
                                                      aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -236,7 +276,7 @@
                                              </div>
                                              <div class="modal-body">
                                                  <form
-                                                     action="<?php echo base_url('index.php/Peminjaman_ruangan/acc/1/'.$pengguna->id_peminjaman_ruangan) ?>/"
+                                                     action="<?php echo base_url('index.php/Peminjaman_ruangan/acc/1/'.$pengguna->id_peminjaman_ruangan.'/3') ?>/"
                                                      method="POST">
                                                      <div class="form-group">
                                                          <label for="exampleInputEmail1">alasan</label>
@@ -251,6 +291,117 @@
                                      </div>
                                  </div>
 
+                                 <div class="tolak_admin modal fade" tabindex="-1" role="dialog"
+                                     aria-labelledby="myModalLabel">
+                                     <div class="modal-dialog" role="document">
+                                         <div class="modal-content">
+                                             <div class="modal-header">
+                                                 <h4 class="modal-title" id="myModalLabel">Alasan Ditolak Admin
+                                                 </h4>
+                                                 <button type="button" class="close" data-dismiss="modal"
+                                                     aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                                             </div>
+                                             <div class="modal-body">
+                                                 <form
+                                                     action="<?php echo base_url('index.php/Peminjaman_ruangan/acc/0/'.$pengguna->id_peminjaman_ruangan.'/3') ?>/"
+                                                     method="POST">
+                                                     <div class="form-group">
+                                                         <label for="exampleInputEmail1">alasan</label>
+                                                         <textarea class="form-control" rows="3"
+                                                             name="alasan"></textarea>
+                                                     </div>
+
+                                                     <button type="submit" class="btn btn-default">Submit</button>
+                                                 </form>
+                                             </div>
+                                         </div>
+                                     </div>
+                                 </div>
+
+                                 <div class="terima_admin modal fade" tabindex="-1" role="dialog"
+                                     aria-labelledby="myModalLabel">
+                                     <div class="modal-dialog" role="document">
+                                         <div class="modal-content">
+                                             <div class="modal-header">
+                                                 <h4 class="modal-title" id="myModalLabel">Alasan Diterima Admin
+                                                 </h4>
+                                                 <button type="button" class="close" data-dismiss="modal"
+                                                     aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                                             </div>
+                                             <div class="modal-body">
+                                                 <form
+                                                     action="<?php echo base_url('index.php/Peminjaman_ruangan/acc/1/'.$pengguna->id_peminjaman_ruangan.'/2') ?>/"
+                                                     method="POST">
+                                                     <div class="form-group">
+                                                         <label for="exampleInputEmail1">alasan</label>
+                                                         <textarea class="form-control" rows="3"
+                                                             name="alasan"></textarea>
+                                                     </div>
+
+                                                     <button type="submit" class="btn btn-default">Submit</button>
+                                                 </form>
+                                             </div>
+                                         </div>
+                                     </div>
+                                 </div>
+
+                                 <div class="tolak_dekan modal fade" tabindex="-1" role="dialog"
+                                     aria-labelledby="myModalLabel">
+                                     <div class="modal-dialog" role="document">
+                                         <div class="modal-content">
+                                             <div class="modal-header">
+                                                 <h4 class="modal-title" id="myModalLabel">Alasan Ditolak Dekan
+                                                 </h4>
+                                                 <button type="button" class="close" data-dismiss="modal"
+                                                     aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                                             </div>
+                                             <div class="modal-body">
+                                                 <form
+                                                     action="<?php echo base_url('index.php/Peminjaman_ruangan/acc/2/'.$pengguna->id_peminjaman_ruangan.'/2') ?>/"
+                                                     method="POST">
+                                                     <div class="form-group">
+                                                         <label for="exampleInputEmail1">alasan</label>
+                                                         <textarea class="form-control" rows="3"
+                                                             name="alasan"></textarea>
+                                                     </div>
+
+                                                     <button type="submit" class="btn btn-default">Submit</button>
+                                                 </form>
+                                             </div>
+                                         </div>
+                                     </div>
+                                 </div>
+
+                                 <div class="terima_dekan modal fade" tabindex="-1" role="dialog"
+                                     aria-labelledby="myModalLabel">
+                                     <div class="modal-dialog" role="document">
+                                         <div class="modal-content">
+                                             <div class="modal-header">
+                                                 <h4 class="modal-title" id="myModalLabel">Alasan Diterima Dekan
+                                                 </h4>
+                                                 <button type="button" class="close" data-dismiss="modal"
+                                                     aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                                             </div>
+                                             <div class="modal-body">
+                                                 <form
+                                                     action="<?php echo base_url('index.php/Peminjaman_ruangan/acc/1/'.$pengguna->id_peminjaman_ruangan.'/2') ?>/"
+                                                     method="POST">
+                                                     <div class="form-group">
+                                                         <label for="exampleInputEmail1">alasan</label>
+                                                         <textarea class="form-control" rows="3"
+                                                             name="alasan"></textarea>
+                                                     </div>
+
+                                                     <button type="submit" class="btn btn-default">Submit</button>
+                                                 </form>
+                                             </div>
+                                         </div>
+                                     </div>
+                                 </div>
                              </div>
                          </div>
                      </div>

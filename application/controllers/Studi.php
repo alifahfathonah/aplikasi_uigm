@@ -39,7 +39,14 @@ class Studi extends CI_Controller {
 	{	
 		 $judulhalaman = "Studi";
 		$this->data['judulhalaman'] = $judulhalaman;
-		$this->data['pengguna']=$this->Studi_model->get_all();
+		if($this->session->userdata('unit_pegawai') == 'Admin'){
+			$id_status_progres_pengajuan = 3;
+		 }else if($this->session->userdata('unit_pegawai') == 'Dekan'){
+			$id_status_progres_pengajuan = 2;
+		 }else if($this->session->userdata('unit_pegawai') == 'Kaprodi'){
+			$id_status_progres_pengajuan = 1;
+		 }
+		$this->data['pengguna']=$this->Studi_model->get_all_by_status_progres($id_status_progres_pengajuan);
 
 		$this->load->view('Temp/header');
 		$this->load->view('Temp/sidebar',$this->data);			
@@ -58,6 +65,7 @@ class Studi extends CI_Controller {
 		$this->data_user['instansi_dituju']=$this->input->post('instansi_dituju');
 		$this->data_user['fakultas']=$this->input->post('fakultas');
 		$this->data_user['progam_studi']=$this->input->post('progam_studi');
+		$this->data_user['status_progres_pengajuan']=1;
 		$this->data_user['jenjang']=$this->input->post('jenjang');
 		$this->data_user['tahun_ajaran']=$this->input->post('tahun_ajaran');
 		$this->data_user['biaya_persemester']=$this->input->post('biaya_persemester');
@@ -163,12 +171,13 @@ class Studi extends CI_Controller {
 		redirect('Studi');
 	}
 
-	public function acc($status= null, $id_studi=null){
+	public function acc($status= null, $id_studi=null, $status_progres_pengajuan){
 		
 		$alasan = $this->input->post('alasan');
 
 		$data = array(
 			'status_studi' => $status,
+			'status_progres_pengajuan' => $status_progres_pengajuan,
 			'alasan' => $alasan
 		);
 

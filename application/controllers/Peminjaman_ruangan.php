@@ -22,7 +22,6 @@ class Peminjaman_ruangan extends CI_Controller {
 
 	public function index()
 	{	
-		
 			
 		 $judulhalaman = "Peminjaman Ruangan";
 		$this->data['judulhalaman'] = $judulhalaman;
@@ -35,11 +34,32 @@ class Peminjaman_ruangan extends CI_Controller {
 
 	}
 
+	public function ruangan_dipakai()
+	{	
+			
+		 $judulhalaman = "Ruangan_Dipakai";
+		$this->data['judulhalaman'] = $judulhalaman;
+		$this->data['pengguna']=$this->Peminjaman_model->Peminjaman_model->get_all_by_status_progres_acc_dekan(2);
+
+		$this->load->view('Temp/header');
+		$this->load->view('Temp/sidebar',$this->data);			
+		$this->load->view('Peminjaman_ruangan/daftar_ruangan_dipakai');	
+		$this->load->view('Temp/footer');	
+
+	}
+
 	public function approve()
 	{	
 		 $judulhalaman = "Peminjaman";
+		 if($this->session->userdata('unit_pegawai') == 'Admin'){
+			$id_status_progres_pengajuan = 3;
+		 }else if($this->session->userdata('unit_pegawai') == 'Dekan'){
+			$id_status_progres_pengajuan = 2;
+		 }else if($this->session->userdata('unit_pegawai') == 'Kaprodi'){
+			$id_status_progres_pengajuan = 1;
+		 }
 		$this->data['judulhalaman'] = $judulhalaman;
-		$this->data['pengguna']=$this->Peminjaman_model->get_all();
+		$this->data['pengguna']=$this->Peminjaman_model->get_all_by_status_progres($id_status_progres_pengajuan);
 
 		$this->load->view('Temp/header');
 		$this->load->view('Temp/sidebar',$this->data);			
@@ -54,11 +74,13 @@ class Peminjaman_ruangan extends CI_Controller {
 		$this->data_user['id_akademik']=$this->session->userdata('id');
 		$this->data_user['jenis_ruangan']=$this->input->post('jenis_ruangan');
 		$this->data_user['jenis_perlengkapan']=$this->input->post('jenis_perlengkapan');
+		$this->data_user['jumlah_perlengkapan']=$this->input->post('jumlah_perlengkapan');
 		$this->data_user['waktu_mulai']=$this->input->post('waktu_mulai');
 		$this->data_user['waktu_selesai']=$this->input->post('waktu_selesai');
 		$this->data_user['jenis_kegiatan']=$this->input->post('jenis_kegiatan');
 		$this->data_user['jumlah_hadir']=$this->input->post('jumlah_hadir');
 		$this->data_user['penanggung_jawab']=$this->input->post('penanggung_jawab');
+		$this->data_user['status_progres_pengajuan']=1;
 		$this->data_user['isi_surat']=$this->input->post('isi_surat');
 		$tanggal_m=$this->input->post('tanggal_mulai');
 		$this->data_user['tanggal_mulai'] = date("Y-m-d", strtotime($tanggal_m)) ;
@@ -175,12 +197,13 @@ class Peminjaman_ruangan extends CI_Controller {
 		redirect('Peminjaman_ruangan');
 	}
 
-	public function acc($status= null, $id_peminjaman_ruangan=null){
+	public function acc($status= null, $id_peminjaman_ruangan=null, $status_progres_pengajuan=null){
 		
 		$alasan = $this->input->post('alasan');
 
 		$data = array(
 			'status_peminjaman' => $status,
+			'status_progres_pengajuan' => $status_progres_pengajuan,
 			'alasan' => $alasan
 		);
 

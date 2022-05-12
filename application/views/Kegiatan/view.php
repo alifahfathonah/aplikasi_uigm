@@ -153,13 +153,13 @@
                                                      name="isi_surat"><?php echo $pengguna->alasan; ?></textarea>
                                              </div>
                                          </div>
-
+                                         <a href="<?php echo base_url('index.php/Kegiatan/approve') ?>">
+                                             <button type="button" class="btn "><i class="fa fa-reply"></i></button>
+                                         </a>
                                          <!-- /.box-body -->
                                          <div class="box-footer">
                                              <?php if ($this->session->userdata('unit_pegawai') == "Dekan" || $this->session->userdata('unit_pegawai') == "Admin" ) { ?>
-                                             <a href="<?php echo base_url('index.php/Kegiatan/approve') ?>">
-                                                 <button type="button" class="btn "><i class="fa fa-reply"></i></button>
-                                             </a>
+
                                              <?php  if ( $this->session->userdata('unit_pegawai') == "Dekan" ) { ?>
 
                                              <button type="button" class="btn btn-success  pull-right"
@@ -173,15 +173,13 @@
 
                                              <?php }
               }  else { ?>
-                                           
+
                                              <?php } ?>
                                          </div>
 
                                          <div class="box-footer">
                                              <?php if ($this->session->userdata('unit_pegawai') == "Kaprodi" || $this->session->userdata('unit_pegawai') == "Admin" ) { ?>
-                                             <a href="<?php echo base_url('index.php/Kegiatan/approve') ?>">
-                                                 <button type="button" class="btn "><i class="fa fa-reply"></i></button>
-                                             </a>
+
                                              <?php  if ($pengguna->status_kegiatan == 0 && $this->session->userdata('unit_pegawai') == "Kaprodi" ) { ?>
 
                                              <button type="button" class="btn btn-success  pull-right"
@@ -195,11 +193,11 @@
 
                                              <?php }
               }  else { ?>
-                                            
+
                                              <?php } ?>
-                                             
+
                                          </div>
-                                        
+
                                          <!-- /.box-footer -->
                                  </form>
                                  <div class="tolak_dekan modal fade" tabindex="-1" role="dialog"
