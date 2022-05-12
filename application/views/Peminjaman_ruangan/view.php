@@ -112,7 +112,13 @@
                                                      class="form-control"><?php echo $pengguna->jenis_perlengkapan; ?></label>
                                              </div>
                                          </div>
-
+                                         <div class="form-group">
+                                             <label for="JK" class="col-sm-3 control-label">Jumlah Jumlah Perlengkapan</label>
+                                             <div class="col-sm-7">
+                                                 <label for="inputNama"
+                                                     class="form-control"><?php echo $pengguna->jumlah_perlengkapan; ?></label>
+                                             </div>
+                                         </div>
                                          <div class="form-group">
                                              <label for="identitas" class="col-sm-3 control-label">Tanggal
                                                  Pelaksanaan</label>

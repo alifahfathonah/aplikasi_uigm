@@ -142,6 +142,17 @@
                             <a href="<?php echo base_url('index.php/Peminjaman_ruangan/ruangan_dipakai') ?>"><i class="fa fa-building-o"></i><span> Ruangan Dipakai </span> </a>
                         </li>
                 <?php endif;endif;?> 
+
+                <?php if($this->session->userdata('unit_pegawai') == "Admin" ):?>
+                    <?php if($judulhalaman == "Perlengkapan"):?>
+                        <li class="submenu">
+                            <a class="active" href="<?php echo base_url('index.php/Peminjaman_ruangan/perlengkapan') ?>"><i class="fa fa-wrench"></i><span> Data Perlengkapan </span> </a>
+                        </li>
+                    <?php else:?>
+                        <li class="submenu">
+                            <a href="<?php echo base_url('index.php/Peminjaman_ruangan/perlengkapan') ?>"><i class="fa fa-wrench"></i><span>  Data Perlengkapan </span> </a>
+                        </li>
+                <?php endif;endif;?> 
             </ul>
 
             <div class="clearfix"></div>

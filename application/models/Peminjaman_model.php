@@ -34,6 +34,24 @@ class Peminjaman_model extends CI_Model
         return $query->result();
     }
 
+    function get_all_perlengkapan()
+    {
+        $this->db->order_by('id_jenis_perlengkapan');
+        $query = $this->db->get('perlengkapan');
+        return $query->result();
+    }
+
+    function get_data_perlengkapan_by_id($id)
+    {
+        $this->db->order_by('id_jenis_perlengkapan');
+        $this->db->where('id_jenis_perlengkapan', $id);
+        $query = $this->db->get('perlengkapan');
+        
+        
+       
+        return $query->row();
+    }
+
     function get_all()
     {
         $this->db->join('akademik','akademik.id_akademik=peminjaman_ruangan.id_akademik');
@@ -75,10 +93,21 @@ class Peminjaman_model extends CI_Model
         return $this->db->insert($this->table_name, $data);
     }
 
+    function insert_perlengkapan($data)
+    {
+        return $this->db->insert('perlengkapan', $data);
+    }
+
     function edit($id, $data)
     {
         $this->db->where($this->primary_key, $id);
         return $this->db->update($this->table_name, $data);
+    }
+
+    function edit_perlengkapan($id, $data)
+    {
+        $this->db->where('id_jenis_perlengkapan', $id);
+        return $this->db->update('perlengkapan', $data);
     }
 
     function delete($id)

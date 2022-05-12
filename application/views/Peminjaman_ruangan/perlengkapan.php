@@ -25,10 +25,12 @@
                             <div class="card card-primary card-tabs">
                                 <div class="card-body">
                                     <div class="tab-content">
-                                        <h4><i class="fa fa-fw fa-bars"></i> Data Ruangan Dipakai</h4>
+                                        <h4><i class="fa fa-fw fa-bars"></i> Data Perlengkapan</h4>
                                         <hr>
                                         <div class="tab-pane fade show active">
-                                            
+                                            <a href="<?php echo base_url('index.php/Peminjaman_ruangan/form_perlengkapan') ?>">
+                                                <button type="button" class="btn btn-danger"><i
+                                                        class="fa fa-plus"></i></button>
                                             </a>
                                             <?php if($this->session->flashdata('berhasil')): ?>
                                             <div class="alert alert-success alert-dismissable">
@@ -50,49 +52,31 @@
                                                 id="example1">
                                                 <thead>
                                                     <tr>
-                                                        <th> No</th>
-                                                        <th>Ruangan</th>
-                                                        <th>Tanggal & Waktu</th>
-                                                        <th>Jenis Kegiatan</th>
-                                                        <th>Status</th>
-                                                        <th>Status Progres Pengajuan</th>
+                                                        <th>No</th>
+                                                        <th>Jenis Perlengkapan</th>
+                                                        <th>Jumlah Perlengkapan</th>
+                                                        <th>Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody class="">
-                                                    <?php $i=0; if($pengguna != 0)
+                                                    <?php $i=0; if($perlengkapan != 0)
                           {                  
-                            foreach ($pengguna as $out) {
-                              if ($out->status_peminjaman == 0) {
-                                $status = "-";
-                              }
-                              elseif ($out->status_peminjaman == 1) {
-                                $status = "Setuju";
-                              }
-                              else{
-                                $status = "Ditolak";
-                              }
+                            foreach ($perlengkapan as $out) {
+                             
 
-                              if ($out->status_progres_pengajuan == 3) {
-                                $status_progres_pengajuan = "Admin";
-                              }
-                              elseif ($out->status_progres_pengajuan == 2) {
-                                $status_progres_pengajuan = "Dekan";
-                              }
-                              elseif ($out->status_progres_pengajuan == 1) {
-                                $status_progres_pengajuan = "Kaprodi";
-                              }
                             echo 
                               "<tr>".
                                "<td>".($i+1)."</td>".
-                                "<td>".$out->jenis_ruangan."</td>".
-                                "<td>"
-                                .$out->tanggal_mulai." S/D ".$out->tanggal_selesai."<br>"
-                                .$out->waktu_mulai." S/D ".$out->waktu_selesai.
-                                "</td>".
-                                "<td>".$out->jenis_kegiatan."</td>".
-                                "<td>".$status."</td>".
-                                "<td>".$status_progres_pengajuan."</td>"
-                                ;       
+                                "<td>".$out->jenis_perlengkapan."</td>".
+                                
+                                "<td>".$out->jumlah_perlengkapan."</td>".
+                                
+                                '<td>
+                                    <center>
+                                        <a class="btn btn-social-icon btn-danger" href="'.base_url("index.php/Peminjaman_ruangan/delete_perlengkapan/".$out->id_jenis_perlengkapan).'"><i class="fa fa-remove"></i></a> 
+                                        <a class="btn btn-social-icon btn-facebook" href="'.base_url("index.php/Peminjaman_ruangan/data_edit_perlengkapan/".$out->id_jenis_perlengkapan).'"><i class="fa fa-pencil"></i></a>   
+                                    </center>
+                                </td>';       
                                                       
                               echo "</tr>";
                                $i++;
@@ -108,12 +92,12 @@
                                 <!-- /.card -->
                             </div>
                         </div>
-
+                        
                     </div>
                     <!-- /.row -->
 
                 </div><!-- /.container-fluid -->
-
+                
             </div>
             <!-- /.content -->
         </div>

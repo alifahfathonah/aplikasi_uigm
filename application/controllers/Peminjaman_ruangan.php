@@ -34,6 +34,20 @@ class Peminjaman_ruangan extends CI_Controller {
 
 	}
 
+	public function perlengkapan()
+	{	
+			
+		 $judulhalaman = "Perlengkapan";
+		$this->data['judulhalaman'] = $judulhalaman;
+		$this->data['perlengkapan']=$this->Peminjaman_model->get_all_perlengkapan();
+
+		$this->load->view('Temp/header');
+		$this->load->view('Temp/sidebar',$this->data);			
+		$this->load->view('Peminjaman_ruangan/perlengkapan');	
+		$this->load->view('Temp/footer');	
+
+	}
+
 	public function ruangan_dipakai()
 	{	
 			
@@ -110,6 +124,39 @@ class Peminjaman_ruangan extends CI_Controller {
 		
 	}
 
+
+	public function insert_perlengkapan(){
+
+
+		
+		
+		$this->data_user['jenis_perlengkapan']=$this->input->post('jenis_perlengkapan');
+		$this->data_user['jumlah_perlengkapan']=$this->input->post('jumlah_perlengkapan');
+		
+
+		// range tanggal
+		// $range = $this->input->post('periode');			
+		// $tgl_awal = substr($range,0,10);
+		// $this->data_user['tanggal_mulai'] = date("Y-m-d", strtotime($tgl_awal));
+		// $tgl_akhir = substr($range,13,24);
+		// $this->data_user['tanggal_selesai'] = date("Y-m-d", strtotime($tgl_akhir));
+		// selesai range tanggal 
+
+		$result=$this->Peminjaman_model->insert_perlengkapan($this->data_user);
+
+			 if($result != null)
+			{
+				$this->session->set_flashdata('berhasil', 'Data Perlengkapan Berhasil Diinput');			
+			}
+			else
+			{
+				$this->session->set_flashdata('gagal', 'Data Gagal Diinput ');				
+			}
+
+		redirect('Peminjaman_ruangan/perlengkapan');
+		
+	}
+
 	public function form()
 	{
 		$judulhalaman = "Peminjaman Ruangan";
@@ -119,6 +166,19 @@ class Peminjaman_ruangan extends CI_Controller {
 		$this->load->view('Temp/header');	
 		$this->load->view('Temp/sidebar',$this->data);			
 		$this->load->view('Peminjaman_ruangan/form');	
+		$this->load->view('Temp/footer');	
+
+	}
+
+	public function form_perlengkapan()
+	{
+		$judulhalaman = "Perlengkapan";
+		$this->data['judulhalaman'] = $judulhalaman;
+		$this->data['prodi']=$this->Prodi_model->get_all();
+	
+		$this->load->view('Temp/header');	
+		$this->load->view('Temp/sidebar',$this->data);			
+		$this->load->view('Peminjaman_ruangan/form_perlengkapan');	
 		$this->load->view('Temp/footer');	
 
 	}
@@ -137,6 +197,20 @@ class Peminjaman_ruangan extends CI_Controller {
 
 	}
 
+	public function delete_perlengkapan($id_jenis_perlengkapan= null)
+	{
+		$judulhalaman = "Perlengkapan";
+			
+
+		$this->data['judulhalaman'] = $judulhalaman;
+		$this->Peminjaman_model->delete($id_jenis_perlengkapan);
+
+		$this->session->set_flashdata('berhasil', 'Data Perlengkapan Berhasil Dihapus');			
+
+		redirect('Peminjaman_ruangan');	
+
+	}
+
 	public function data_edit($id_peminjaman_ruangan=null){
 
 		$judulhalaman = "Data Peminjaman Ruangan";	
@@ -150,6 +224,21 @@ class Peminjaman_ruangan extends CI_Controller {
 		$this->load->view('Peminjaman_ruangan/edit');	
 		$this->load->view('Temp/footer');
 	}
+
+	public function data_edit_perlengkapan($id_jenis_perlengkapan=null){
+
+		$judulhalaman = "Perlengkapan";	
+		$this->data['judulhalaman'] = $judulhalaman;
+		
+		
+		$this->data['perlengkapan']=$this->Peminjaman_model->get_data_perlengkapan_by_id($id_jenis_perlengkapan);
+
+		$this->load->view('Temp/header');	
+		$this->load->view('Temp/sidebar',$this->data);			
+		$this->load->view('Peminjaman_ruangan/edit_perlengkapan');	
+		$this->load->view('Temp/footer');
+	}
+
 	public function view($id_peminjaman_ruangan=null){
 
 		$judulhalaman = "Data Peminjaman Ruangan";	
@@ -195,6 +284,29 @@ class Peminjaman_ruangan extends CI_Controller {
 				$this->session->set_flashdata('gagal', 'Data Gagal Diinput ');				
 			}
 		redirect('Peminjaman_ruangan');
+	}
+
+	public function edit_perlengkapan($id_jenis_perlengkapan=null){
+		$judulhalaman = "Perlengkapan";
+			
+		$this->data['judulhalaman'] = $judulhalaman;
+
+		$this->data_user['jenis_perlengkapan']=$this->input->post('jenis_perlengkapan');
+		$this->data_user['jumlah_perlengkapan']=$this->input->post('jumlah_perlengkapan');
+
+		
+
+		$result=$this->Peminjaman_model->edit_perlengkapan($id_jenis_perlengkapan,$this->data_user);
+
+		 if($result != null)
+			{
+				$this->session->set_flashdata('berhasil', 'Data Perlengkapan Berhasil Diubah');			
+			}
+			else
+			{
+				$this->session->set_flashdata('gagal', 'Data Gagal Diinput ');				
+			}
+		redirect('Peminjaman_ruangan/perlengkapan');
 	}
 
 	public function acc($status= null, $id_peminjaman_ruangan=null, $status_progres_pengajuan=null){
